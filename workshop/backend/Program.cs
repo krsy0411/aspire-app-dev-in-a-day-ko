@@ -94,7 +94,7 @@ internal class YouTubeSummariserService(IYouTubeVideo youtube, AzureOpenAIClient
 
     public async Task<string> SummariseAsync(SummaryRequest req)
     {
-        Subtitle subtitle = await this._youtube.ExtractSubtitleAsync(req.YouTubeLinkUrl, req.VideoLanguageCode).ConfigureAwait(false);
+        Subtitle subtitle = await this._youtube.ExtractSubtitleAsync(req.YouTubeLinkUrl ?? " https://youtu.be/NN4Zzp-vOrU", req.VideoLanguageCode).ConfigureAwait(false);
         string caption = subtitle.Content.Select(p => p.Text).Aggregate((a, b) => $"{a}\n{b}");
 
         var chat = this._openai.GetChatClient(this._config["OpenAI:DeploymentName"]);
