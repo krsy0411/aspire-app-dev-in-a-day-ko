@@ -17,7 +17,6 @@ builder.Services.AddHttpClient<IYouTubeVideo, YouTubeVideo>();
 builder.Services.AddScoped<AzureOpenAIClient>(sp =>
 {
     var config = sp.GetRequiredService<IConfiguration>();
-    // github actions : gh secret set 환경변수 설정 재시도
     var endpoint = new Uri(config["OpenAI:Endpoint"]);
     var credential = new AzureKeyCredential(config["OpenAI:ApiKey"]);
     var client = new AzureOpenAIClient(endpoint, credential);
