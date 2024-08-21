@@ -94,7 +94,7 @@ internal class YouTubeSummariserService(IYouTubeVideo youtube, AzureOpenAIClient
 
     public async Task<string> SummariseAsync(SummaryRequest req)
     {
-        var videoLinkUrl = req.YouTubeLinkUrl ?? "https://youtu.be/NN4Zzp-vOrU"
+        var videoLinkUrl = req.YouTubeLinkUrl ?? "https://youtu.be/NN4Zzp-vOrU";
         Subtitle subtitle = await this._youtube.ExtractSubtitleAsync(videoLinkUrl, req.VideoLanguageCode).ConfigureAwait(false);
         string caption = subtitle.Content.Select(p => p.Text).Aggregate((a, b) => $"{a}\n{b}");
 
